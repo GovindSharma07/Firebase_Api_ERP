@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const { response } = require("express");
 const admin = require("firebase-admin");
 const serviceAccount = JSON.parse(process.env.serviceAccount);
 
@@ -33,7 +34,7 @@ exports.sendNormalPushNotification = async (req, res, next) => {
 }
 
 
-exports.SendLocationToTopic = (req, res, next) => {
+exports.SendLocationToTopic = async (req, res, next) => {
     try {
         const message = {
             data: {
@@ -43,7 +44,7 @@ exports.SendLocationToTopic = (req, res, next) => {
             topic: req.body.topic
         }
 
-        admin.messaging().send(message)
+        await admin.messaging().send(message)
             .then((response) => {
                 return res.sent("Sent")
             })
@@ -53,5 +54,25 @@ exports.SendLocationToTopic = (req, res, next) => {
     }
     catch (err) {
         return res.send(err)
+    }
+}
+
+exports.sendLocationToMultiUser = async (req, res, next) => {
+    try {
+        const message = {
+            data: {
+                lat: req.body.lat,
+                lng: req.body.lng
+            },
+            tokens: req.body.tokens
+        };
+
+        await admin.messaging().sendEachForMulticast(message).then((response) => {
+            return res.send(response);
+        }).catch((err) => {
+            return res.send(err)
+        })
+    } catch (error) {
+        return res.send(error);
     }
 }
