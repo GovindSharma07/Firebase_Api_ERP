@@ -68,7 +68,7 @@ exports.sendLocationToMultiUser = async (req, res, next) => {
         };
 
         await admin.messaging().sendEachForMulticast(message).then((response) => {
-            return res.send(response);
+            return res.send("Sent");
         }).catch((err) => {
             return res.send(err)
         })
