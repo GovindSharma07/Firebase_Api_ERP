@@ -76,3 +76,21 @@ exports.sendLocationToMultiUser = async (req, res, next) => {
         return res.send(error);
     }
 }
+
+
+exports.createNewUser = async (req,res,next)=>{
+    try{
+        const email = req.body.email;
+        const password = req.body.password;
+
+        await admin.auth().createUser({
+            email : email,
+            password : password
+        }).then((cred)=>{
+            return res.send(cred.uid);
+        })
+    }
+    catch(err){
+        return res.send(err);
+    }
+}
