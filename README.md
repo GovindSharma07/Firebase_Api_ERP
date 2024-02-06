@@ -1,5 +1,15 @@
 This is the API for the firebase function for ERP features like
-> Location Sharing Using FCM
-> Create New User
-> Creating/Updating User profile in Firebase Database
-> Sending Notifications
+<ul>
+  <li>
+    Location Sharing Using FCM  
+  </li>
+  <li>
+     Create New User
+  </li>
+  <li>
+    Creating/Updating User profile in Firebase Database
+  </li>
+  <li>
+    Sending Notifications
+  </li>
+</ul>
