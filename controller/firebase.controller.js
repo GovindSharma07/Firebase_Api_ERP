@@ -78,19 +78,25 @@ exports.sendLocationToMultiUser = async (req, res, next) => {
 }
 
 
-exports.createNewUser = async (req,res,next)=>{
+exports.createUser = async (req,res,next)=>{
     try{
         const email = req.body.email;
         const password = req.body.password;
-
-        await admin.auth().createUser({
-            email : email,
-            password : password
-        }).then((cred)=>{
-            return res.send(cred.uid);
-        })
+        try {
+            const userRecord = await admin.auth().getUserByEmail(email);    
+            return res.send(userRecord);
+        } catch (error) {
+            if(error["code"] == "auth/user-not-found"){
+                await admin.auth().createUser({
+                    email : email,
+                    password : password
+                }).then((cred)=>{
+                    return res.send(cred);
+                });
+            }
+        }
     }
     catch(err){
-        return res.send(err);
+        return res.send(["00",err]);
     }
 }

@@ -8,5 +8,5 @@ routes.post("/send-normal-notification", firebaseApi.sendNormalPushNotification)
 routes.post("/sendToTopic",firebaseApi.SendLocationToTopic);
 routes.post('/sendLocationToMultiUser',firebaseApi.sendLocationToMultiUser);
 
-routes.post("/createNewUser",firebaseApi.createNewUser);
+routes.post("/createUser",firebaseApi.createUser);
 module.exports = routes;
