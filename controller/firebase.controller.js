@@ -84,19 +84,19 @@ exports.createUser = async (req,res,next)=>{
         const password = req.body.password;
         try {
             const userRecord = await admin.auth().getUserByEmail(email);    
-            return res.send(userRecord);
+            return res.send([true,userRecord]);
         } catch (error) {
             if(error["code"] == "auth/user-not-found"){
                 await admin.auth().createUser({
                     email : email,
                     password : password
                 }).then((cred)=>{
-                    return res.send(cred);
+                    return res.send([true,cred]);
                 });
             }
         }
     }
     catch(err){
-        return res.send(["00",err]);
+        return res.send([false,err]);
     }
 }
