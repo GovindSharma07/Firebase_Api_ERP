@@ -116,7 +116,6 @@ exports.addDriverDetails = async (req, res, next) => {
         const contact = req.body.contact;
         const address = req.body.address;
 
-        console.log(req.body);
         const details = {
             "Uid": uid,
             "Email": email,
