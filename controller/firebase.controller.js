@@ -129,10 +129,10 @@ exports.addDriverDetails = async (req, res, next) => {
         const docRef = db.collection("User-Driver").doc(uid);
 
         const response = await docRef.set(details);
-        return res.send([true]);
+        return res.send(true);
 
     }
     catch (err) {
-        return res.send([false]);
+        return res.send(false);
     }
 }
