@@ -136,3 +136,37 @@ exports.addDriverDetails = async (req, res, next) => {
         return res.send(false);
     }
 }
+
+//adding teacher details to the database
+exports.addTeacherDetails = async (req, res, next) => {
+    try {
+        const uid = req.body.uid;
+        const email = req.body.email;
+        const fName = req.body.fName;
+        const lName = req.body.lName;
+        const department = req.body.department;
+        const busAllocated = req.body.busAllocated;
+        const contact = req.body.contact;
+        const address = req.body.address;
+
+        const details = {
+            "Uid": uid,
+            "Email": email,
+            "First Name": fName,
+            "Last Name": lName,
+            "Department" : department,
+            "Bus Allocated": busAllocated,
+            "Contact": contact,
+            "Address": address
+        }
+
+        const docRef = db.collection("User-Teacher").doc(uid);
+
+        const response = await docRef.set(details);
+        return res.send(true);
+
+    }
+    catch (err) {
+        return res.send(false);
+    }
+}
