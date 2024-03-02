@@ -154,13 +154,59 @@ exports.addTeacherDetails = async (req, res, next) => {
             "Email": email,
             "First Name": fName,
             "Last Name": lName,
-            "Department" : department,
+            "Department": department,
             "Bus Allocated": busAllocated,
             "Contact": contact,
             "Address": address
         }
 
         const docRef = db.collection("User-Teacher").doc(uid);
+
+        const response = await docRef.set(details);
+        return res.send(true);
+
+    }
+    catch (err) {
+        return res.send(false);
+    }
+}
+
+//adding student details to the database
+exports.addStudentDetails = async (req, res, next) => {
+    try {
+        const uid = req.body.uid;
+        const email = req.body.email;
+        const fName = req.body.fName;
+        const lName = req.body.lName;
+        const rollNo = req.body.rollNo;
+        const dob = req.body.dob;
+        const gender = req.body.gender;
+        const annualFees = req.body.annualFees;
+        const parentContact = req.body.parentContact;
+        const busAllocated = req.body.busAllocated;
+        const studentContact = req.body.studentContact;
+        const address = req.body.address;
+        const section = req.body.section;
+        const course = req.body.course;
+
+        const details = {
+            "Uid": uid,
+            "Email": email,
+            "First Name": fName,
+            "Last Name": lName,
+            "Roll No": rollNo,
+            "DOB": dob,
+            "Gender": gender,
+            "Annual Fees": annualFees,
+            "Bus Allocated": busAllocated,
+            "Student Contact": studentContact,
+            "Parent Contact": parentContact,
+            "Address": address,
+            "Course": course,
+            "Section": section
+        };
+
+        const docRef = db.collection("User-Student").doc(uid);
 
         const response = await docRef.set(details);
         return res.send(true);

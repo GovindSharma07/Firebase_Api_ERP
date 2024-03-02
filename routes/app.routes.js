@@ -10,5 +10,6 @@ routes.post('/sendLocationToMultiUser', firebaseApi.sendLocationToMultiUser);
 
 routes.post("/user/createUser", firebaseApi.createUser);
 routes.post("/user/addDriverDetails", firebaseApi.addDriverDetails);
-routes.post("/user/addTeacherDetails",firebaseApi.addTeacherDetails);
+routes.post("/user/addTeacherDetails", firebaseApi.addTeacherDetails);
+routes.post("/user/addStudentDetails", firebaseApi.addStudentDetails);
 module.exports = routes;
