@@ -117,13 +117,13 @@ exports.addDriverDetails = async (req, res, next) => {
         const address = req.body.address;
 
         const details = {
-            "Uid": uid,
-            "Email": email,
-            "First Name": fName,
-            "Last Name": lName,
-            "Bus Number": busNumber,
-            "Contact": contact,
-            "Address": address
+            "uid": uid,
+            "email": email,
+            "fName": fName,
+            "lName": lName,
+            "busNumber": busNumber,
+            "contact": contact,
+            "address": address
         }
 
         const docRef = db.collection("User-Driver").doc(uid);
@@ -150,14 +150,14 @@ exports.addTeacherDetails = async (req, res, next) => {
         const address = req.body.address;
 
         const details = {
-            "Uid": uid,
-            "Email": email,
-            "First Name": fName,
-            "Last Name": lName,
-            "Department": department,
-            "Bus Allocated": busAllocated,
-            "Contact": contact,
-            "Address": address
+            "uid": uid,
+            "email": email,
+            "fName": fName,
+            "lName": lName,
+            "department": department,
+            "busAllocated": busAllocated,
+            "contact": contact,
+            "address": address,
         }
 
         const docRef = db.collection("User-Teacher").doc(uid);
@@ -179,9 +179,10 @@ exports.addStudentDetails = async (req, res, next) => {
         const fName = req.body.fName;
         const lName = req.body.lName;
         const rollNo = req.body.rollNo;
-        const dob = req.body.dob;
+        const dob = req.body.dateOfBirth;
         const gender = req.body.gender;
         const annualFees = req.body.annualFees;
+        const feesPaid = req.body.feesPaid;
         const parentContact = req.body.parentContact;
         const busAllocated = req.body.busAllocated;
         const studentContact = req.body.studentContact;
@@ -190,20 +191,21 @@ exports.addStudentDetails = async (req, res, next) => {
         const course = req.body.course;
 
         const details = {
-            "Uid": uid,
-            "Email": email,
-            "First Name": fName,
-            "Last Name": lName,
-            "Roll No": rollNo,
-            "DOB": dob,
-            "Gender": gender,
-            "Annual Fees": annualFees,
-            "Bus Allocated": busAllocated,
-            "Student Contact": studentContact,
-            "Parent Contact": parentContact,
-            "Address": address,
-            "Course": course,
-            "Section": section
+            "uid": uid,
+            "email": email,
+            "fName": fName,
+            "lName": lName,
+            "rollNo": rollNo,
+            "dateOfBirth": dob,
+            "gender": gender,
+            "annualFees": annualFees,
+            "feesPaid": feesPaid,
+            "busAllocated": busAllocated,
+            "studentContact": studentContact,
+            "parentContact": parentContact,
+            "address": address,
+            "course": course,
+            "section": section
         };
 
         const docRef = db.collection("User-Student").doc(uid);
