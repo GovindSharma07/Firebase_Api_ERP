@@ -12,4 +12,7 @@ routes.post("/user/createUser", firebaseApi.createUser);
 routes.post("/user/addDriverDetails", firebaseApi.addDriverDetails);
 routes.post("/user/addTeacherDetails", firebaseApi.addTeacherDetails);
 routes.post("/user/addStudentDetails", firebaseApi.addStudentDetails);
+
+routes.post("/user/updateStudentFeesPaid",firebaseApi.updateStudentFeesPaid);
+routes.post("/user/addFeesDetails",firebaseApi.addFeesDetails);
 module.exports = routes;

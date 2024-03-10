@@ -108,27 +108,8 @@ exports.createUser = async (req, res, next) => {
 //adding driver details to the database
 exports.addDriverDetails = async (req, res, next) => {
     try {
-        const uid = req.body.uid;
-        const email = req.body.email;
-        const fName = req.body.fName;
-        const lName = req.body.lName;
-        const busNumber = req.body.busNumber;
-        const contact = req.body.contact;
-        const address = req.body.address;
-
-        const details = {
-            "uid": uid,
-            "email": email,
-            "fName": fName,
-            "lName": lName,
-            "busNumber": busNumber,
-            "contact": contact,
-            "address": address
-        }
-
-        const docRef = db.collection("User-Driver").doc(uid);
-
-        const response = await docRef.set(details);
+        const docRef = db.collection("User-Driver").doc(req.body.uid);
+        await docRef.set(req.body);
         return res.send(true);
 
     }
@@ -140,31 +121,9 @@ exports.addDriverDetails = async (req, res, next) => {
 //adding teacher details to the database
 exports.addTeacherDetails = async (req, res, next) => {
     try {
-        const uid = req.body.uid;
-        const email = req.body.email;
-        const fName = req.body.fName;
-        const lName = req.body.lName;
-        const department = req.body.department;
-        const busAllocated = req.body.busAllocated;
-        const contact = req.body.contact;
-        const address = req.body.address;
-
-        const details = {
-            "uid": uid,
-            "email": email,
-            "fName": fName,
-            "lName": lName,
-            "department": department,
-            "busAllocated": busAllocated,
-            "contact": contact,
-            "address": address,
-        }
-
-        const docRef = db.collection("User-Teacher").doc(uid);
-
-        const response = await docRef.set(details);
+        const docRef = db.collection("User-Teacher").doc(req.body.uid);
+        docRef.set(req.body);
         return res.send(true);
-
     }
     catch (err) {
         return res.send(false);
@@ -174,47 +133,33 @@ exports.addTeacherDetails = async (req, res, next) => {
 //adding student details to the database
 exports.addStudentDetails = async (req, res, next) => {
     try {
-        const uid = req.body.uid;
-        const email = req.body.email;
-        const fName = req.body.fName;
-        const lName = req.body.lName;
-        const rollNo = req.body.rollNo;
-        const dob = req.body.dateOfBirth;
-        const gender = req.body.gender;
-        const annualFees = req.body.annualFees;
-        const feesPaid = req.body.feesPaid;
-        const parentContact = req.body.parentContact;
-        const busAllocated = req.body.busAllocated;
-        const studentContact = req.body.studentContact;
-        const address = req.body.address;
-        const section = req.body.section;
-        const course = req.body.course;
-
-        const details = {
-            "uid": uid,
-            "email": email,
-            "fName": fName,
-            "lName": lName,
-            "rollNo": rollNo,
-            "dateOfBirth": dob,
-            "gender": gender,
-            "annualFees": annualFees,
-            "feesPaid": feesPaid,
-            "busAllocated": busAllocated,
-            "studentContact": studentContact,
-            "parentContact": parentContact,
-            "address": address,
-            "course": course,
-            "section": section
-        };
-
-        const docRef = db.collection("User-Student").doc(uid);
-
-        const response = await docRef.set(details);
+        const docRef = db.collection("User-Student").doc(req.body.uid);
+        await docRef.set(req.body);
         return res.send(true);
 
     }
     catch (err) {
         return res.send(false);
+    }
+}
+
+//Update the fees Paid
+exports.updateStudentFeesPaid = (req, res, next) => {
+    try {
+        db.collection("User-Student").doc(req.body.uid).update({ "feesPaid": req.body.feesPaid });
+        return res.send(true);
+    } catch (err) {
+        return res.send(err);
+    }
+}
+
+//Adding fees Details to the users account and also to the common place
+exports.addFeesDetails = async (req, res, next) => {
+    try {
+        await db.collection("User-Student").doc(req.body.uid).collection("Fees-Submitted").add(req.body);
+        await db.collection("Fees-Paid").add(req.body);
+        return res.send(true);
+    } catch (error) {
+        return res.send(error);
     }
 }
