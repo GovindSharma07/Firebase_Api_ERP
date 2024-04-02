@@ -15,4 +15,10 @@ routes.post("/user/addStudentDetails", firebaseApi.addStudentDetails);
 
 routes.post("/user/updateStudentFeesPaid",firebaseApi.updateStudentFeesPaid);
 routes.post("/user/addFeesDetails",firebaseApi.addFeesDetails);
+
+routes.post("/user/getData/student",firebaseApi.getStudentData);
+routes.post("/user/getData/teacher",firebaseApi.getTeacherData);
+routes.post("/user/getData/driver",firebaseApi.getDriverData);
+
+
 module.exports = routes;

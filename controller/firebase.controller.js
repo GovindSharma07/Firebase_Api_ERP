@@ -163,3 +163,20 @@ exports.addFeesDetails = async (req, res, next) => {
         return res.send(error);
     }
 }
+
+exports.getStudentData = async (req, res, next) => {
+    var snapshot = await db.collection("User-Student").doc(req.body.uid).get();
+    return res.send(snapshot.data());
+}
+
+
+exports.getTeacherData = async (req, res, next) => {
+    var snapshot = await db.collection("User-Teacher").doc(req.body.uid).get();
+    return res.send(snapshot.data());
+}
+
+
+exports.getDriverData = async (req, res, next) => {
+    var snapshot = await db.collection("User-Driver").doc(req.body.uid).get();
+    return res.send(snapshot.data());
+}
