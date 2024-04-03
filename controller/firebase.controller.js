@@ -180,3 +180,14 @@ exports.getDriverData = async (req, res, next) => {
     var snapshot = await db.collection("User-Driver").doc(req.body.uid).get();
     return res.send(snapshot.data());
 }
+
+exports.getListOfClasses = async (req, res, next) => {
+    var listOfClasses = [];
+    await db.collection("User-Teacher").doc(req.body.uid).collection("classes").doc("classes").listCollections().then((value) => {
+        value.forEach((e) => {
+            listOfClasses.push(e.id);
+        })
+    });
+
+    return res.send(listOfClasses);
+}

@@ -20,5 +20,6 @@ routes.post("/user/getData/student",firebaseApi.getStudentData);
 routes.post("/user/getData/teacher",firebaseApi.getTeacherData);
 routes.post("/user/getData/driver",firebaseApi.getDriverData);
 
+routes.post("/user/getListOfClasses",firebaseApi.getListOfClasses);
 
 module.exports = routes;
